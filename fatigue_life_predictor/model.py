@@ -14,7 +14,7 @@ def load_trained_model():
         model_path, 
         custom_objects={
             'Attention': Attention, 
-            'MeanSquaredError': MeanSquaredError  # mse 대신 MeanSquaredError 객체 사용
+            'mse': MeanSquaredError()
         }
     )
     return model
