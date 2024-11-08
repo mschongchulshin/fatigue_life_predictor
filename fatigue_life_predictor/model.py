@@ -14,6 +14,7 @@ def load_trained_model():
         model_path, 
         custom_objects={
             'Attention': Attention, 
+            'MeanSquaredError': MeanSquaredError,
             'mse': MeanSquaredError()
         }
     )
