@@ -13,6 +13,7 @@ def load_trained_model():
             'mse': MeanSquaredError()
         }
     )
+    model.compile(optimizer='adam', loss='mse', metrics=[MeanSquaredError()])
     return model
     
 def predict_fatigue_life(model, X, nf_scaler):
