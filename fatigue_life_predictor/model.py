@@ -5,6 +5,7 @@ import pandas as pd
 from tensorflow.keras.models import load_model
 from fatigue_life_predictor.attention import Attention
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from tensorflow.keras.metrics import MeanSquaredError
 
 def load_trained_model():
     # 모델 파일 경로 설정
@@ -13,7 +14,8 @@ def load_trained_model():
         model_path, 
         custom_objects={'Attention': Attention}
     )
-    model.compile(optimizer='adam', loss='mse')
+    # `MeanSquaredError()` 객체를 사용해 컴파일
+    model.compile(optimizer='adam', loss=MeanSquaredError())
     return model
 
 def load_scalers():
