@@ -1,7 +1,8 @@
 from tensorflow.keras.models import load_model
 import os
+from .attention import Attention  
 
-# Attention 레이어가 포함된 모델을 로드하는 함수
+
 def load_trained_model():
     model_path = os.path.join(os.path.dirname(__file__), 'fatigue_life_model.h5')
     model = load_model(model_path, custom_objects={'Attention': Attention})
