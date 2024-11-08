@@ -36,7 +36,7 @@ def load_scalers():
 
 def predict_fatigue_life(model, scaler, nf_scaler, df, n_timesteps=50):
     if len(df) < n_timesteps:
-        raise ValueError(The length of the input data is shorter than n_timesteps.")
+        raise ValueError("The length of the input data is shorter than n_timesteps.")
     
     X_input = df[['Stress', 'Strain']].values[:n_timesteps]
     X_input = X_input.reshape(1, n_timesteps, 2)
