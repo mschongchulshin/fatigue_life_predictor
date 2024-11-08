@@ -6,16 +6,17 @@ from tensorflow.keras.models import load_model
 from fatigue_life_predictor.attention import Attention
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from tensorflow.keras.metrics import MeanSquaredError
+from tensorflow.keras.losses import MeanSquaredError
 
 def load_trained_model():
-    # 모델 파일 경로 설정
     model_path = os.path.join(os.path.dirname(__file__), 'fatigue_life_model.h5')
     model = load_model(
         model_path, 
-        custom_objects={'Attention': Attention}
+        custom_objects={
+            'Attention': Attention, 
+            'MeanSquaredError': MeanSquaredError  # mse 대신 MeanSquaredError 객체 사용
+        }
     )
-    # `MeanSquaredError()` 객체를 사용해 컴파일
-    model.compile(optimizer='adam', loss=MeanSquaredError())
     return model
 
 def load_scalers():
