@@ -24,7 +24,6 @@ def load_trained_model():
     return model
 
 def load_scalers():
-    # 스케일러 파일 경로 설정
     scaler_path = os.path.join(os.path.dirname(__file__), 'scaler.pkl')
     nf_scaler_path = os.path.join(os.path.dirname(__file__), 'nf_scaler.pkl')
     
@@ -36,15 +35,13 @@ def load_scalers():
     return scaler, nf_scaler
 
 def predict_fatigue_life(model, scaler, nf_scaler, df, n_timesteps=50):
-    # 데이터 전처리
     if len(df) < n_timesteps:
-        raise ValueError("입력 데이터의 길이가 n_timesteps보다 짧습니다.")
+        raise ValueError(The length of the input data is shorter than n_timesteps.")
     
     X_input = df[['Stress', 'Strain']].values[:n_timesteps]
     X_input = X_input.reshape(1, n_timesteps, 2)
     X_input_scaled = scaler.transform(X_input.reshape(-1, 2)).reshape(1, n_timesteps, 2)
     
-    # 예측 수행
     y_pred, _ = model.predict(X_input_scaled)
     y_pred_original = nf_scaler.inverse_transform(y_pred)
     
