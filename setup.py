@@ -6,7 +6,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     package_data={
-        'fatigue_life_predictor': ['fatigue_life_model.h5']  # .h5 파일 포함
+        'fatigue_life_predictor': ['fatigue_life_model.h5', 'scaler.pkl', 'nf_scaler.pkl']
     },
     install_requires=[
         'tensorflow>=2.0',
@@ -14,7 +14,7 @@ setup(
         'pandas',
         'scikit-learn'
     ],
-    description='LSTM과 Attention을 사용한 피로 수명 예측 라이브러리',
+    description='A package to predict fatigue life using LSTM model with Attention mechanism',
     author='Hongchul Shin',
     author_email='saekomi5@korea.ac.kr',
     url='https://github.com/mschongchulshin/fatigue_life_predictor',
