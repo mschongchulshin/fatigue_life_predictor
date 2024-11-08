@@ -7,6 +7,8 @@ from fatigue_life_predictor.attention import Attention
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from tensorflow.keras.metrics import MeanSquaredError
 from tensorflow.keras.losses import MeanSquaredError
+from tensorflow.keras.layers import Layer
+
 
 def load_trained_model():
     model_path = os.path.join(os.path.dirname(__file__), 'fatigue_life_model.h5')
@@ -15,8 +17,10 @@ def load_trained_model():
         custom_objects={
             'Attention': Attention, 
             'MeanSquaredError': MeanSquaredError,
+            'mse': MeanSquaredError()
         }
     )
+    model.compile(optimizer='adam', loss='mse', metrics=[MeanSquaredError()])
     return model
 
 def load_scalers():
